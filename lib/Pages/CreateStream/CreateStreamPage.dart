@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:streamstreak/Controller/ImagePickerController.dart';
 import 'package:streamstreak/Widgets/TextFields.dart';
 
 class CreateStreamPage extends StatefulWidget {
@@ -9,9 +13,11 @@ class CreateStreamPage extends StatefulWidget {
 }
 
 class _CreateStreamPageState extends State<CreateStreamPage> {
+  final ImagePickerController imagePickerController = Get.put(ImagePickerController());
   final TextEditingController urlController = TextEditingController();
   final TextEditingController titleController = TextEditingController();
-  String selectedPlatform = "YouTube"; // Default value for dropdown
+  final RxString imagePath = "".obs;
+  String selectedPlatform = "YouTube";
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +70,43 @@ class _CreateStreamPageState extends State<CreateStreamPage> {
             SearchHome(text: "Video / Stream Title"),
             SizedBox(height: 16),
 
+            SizedBox(height: 20),
+            Text(
+              "Choose Thumbnail",
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+            SizedBox(height: 8),
 
-            //add a image picker
+
+            Center(
+              child:InkWell(
+                onTap: () async {
+                  imagePath.value = await imagePickerController.pickImage();
+                  print("IMAGE PICKED: ${imagePath.value}");
+                },
+                child: Obx(() => Container(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: (MediaQuery.of(context).size.width * 0.8) * (9 / 16),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.background,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.secondary,
+                      width: 1,
+                    ),
+                  ),
+                  child: imagePath.value.isEmpty
+                      ? Icon(Icons.add, size: 50, color: Colors.grey)
+                      : ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.file(
+                      File(imagePath.value),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )),
+              ),
+            ),
           ],
         ),
       ),

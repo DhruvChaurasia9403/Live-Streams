@@ -5,7 +5,11 @@ import 'package:streamstreak/Pages/HomePage/HomePage.dart';
 import 'package:streamstreak/Pages/PagePath/PagePath.dart';
 import 'package:streamstreak/Pages/Welcome/WelcomePage.dart';
 
-void main() {
+void main() async {
+  const String cloudName = "dgsxsujn9";
+  const String apiKey = "298341531231328";
+  const String apiSecret = "P8cYl99PCaAgDTvcJ7XKV6xwnLE";
+  print("Cloudinary initialized for $cloudName");
   runApp(const MyApp());
 }
 

@@ -39,6 +39,7 @@ dependencies:
   flutter_svg:
   slide_to_act:
   image_picker:
+  http:
 
 
 dev_dependencies:
