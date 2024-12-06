@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "311326462755",
+    "project_id": "basic-strata-438819-j1",
+    "storage_bucket": "basic-strata-438819-j1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311326462755:android:8831f46e67ebe116097296",
+        "android_client_info": {
+          "package_name": "com.example.streamstreak"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgh5Ex5iMeP2ICZLDfK-VDBpaV2MobLV8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

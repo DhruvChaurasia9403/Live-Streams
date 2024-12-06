@@ -40,6 +40,13 @@ dependencies:
   slide_to_act:
   image_picker:
   http:
+  firebase_auth:
+  firebase_core:
+  firebase_analytics:
+  firebase_storage:
+  cloud_firestore:
+  cloudinary_flutter:
+  cloudinary_url_gen:
 
 
 dev_dependencies:
