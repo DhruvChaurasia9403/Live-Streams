@@ -47,6 +47,7 @@ dependencies:
   cloud_firestore:
   cloudinary_flutter:
   cloudinary_url_gen:
+  shared_preferences: 
 
 
 dev_dependencies:

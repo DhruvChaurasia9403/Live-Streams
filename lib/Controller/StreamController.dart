@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-
 class StreamsController extends GetxController {
   final RxList<Map<String, dynamic>> streams = <Map<String, dynamic>>[].obs;
 
-  /// Fetches streams data from Firestore and updates the streams list.
   Future<void> fetchStreams() async {
     try {
       final querySnapshot = await FirebaseFirestore.instance
@@ -18,7 +16,7 @@ class StreamsController extends GetxController {
         "url": doc['url'],
         "platform": doc['platform'],
         "title": doc['title'],
-        "thumbnail": doc['thumbnail'], // Using the URL directly for thumbnail
+        "thumbnail": doc['thumbnail'],
       })
           .toList();
     } catch (e) {
@@ -26,13 +24,21 @@ class StreamsController extends GetxController {
     }
   }
 
-  /// Adds a new stream to Firestore and refreshes the streams list.
   Future<void> addStream(Map<String, dynamic> streamData) async {
     try {
       await FirebaseFirestore.instance.collection('streams').add(streamData);
-      await fetchStreams(); // Refresh the list after adding a new stream.
+      await fetchStreams();
     } catch (e) {
       print("Error adding stream: $e");
+    }
+  }
+
+  Future<void> deleteStream(String streamId) async {
+    try {
+      await FirebaseFirestore.instance.collection('streams').doc(streamId).delete();
+      await fetchStreams();
+    } catch (e) {
+      print("Error deleting stream: $e");
     }
   }
 }

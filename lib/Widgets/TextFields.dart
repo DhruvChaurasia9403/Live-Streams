@@ -34,9 +34,10 @@ class SearchHome extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 6.0),
+          padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 3.0),
           child: TextField(
             focusNode: focusNode,
+
             controller: controller,
             decoration: InputDecoration(
               hintText: text,

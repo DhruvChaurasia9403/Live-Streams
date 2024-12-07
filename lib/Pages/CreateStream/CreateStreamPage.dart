@@ -86,111 +86,143 @@ class _CreateStreamPageState extends State<CreateStreamPage> {
               color: Theme.of(context).colorScheme.primaryContainer),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 20),
-            Text("Stream URL", style: Theme.of(context).textTheme.labelLarge),
-            SizedBox(height: 8),
-            Obx(() => Stack(
-              alignment: Alignment.centerRight,
-              children: [
-                SearchHome(text: "Paste Your Streaming Link", controller: urlController),
-                isFetchingMetadata.value
-                    ? Padding(
-                  padding: const EdgeInsets.only(right: 12.0),
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                )
-                    : IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () {
-                    fetchMetadata(urlController.text);
-                  },
-                ),
-              ],
-            )),
-            SizedBox(height: 20),
-            Text("Select Platform", style: Theme.of(context).textTheme.labelLarge),
-            SizedBox(height: 8),
-            DropdownButtonFormField<String>(
-              value: selectedPlatform,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(
-                      color: Theme.of(context).colorScheme.secondary),
-                ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(6.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 20),
+              Text("Stream URL", style: Theme.of(context).textTheme.labelLarge),
+              SizedBox(height: 8),
+              // Obx(() => Stack(
+              //   alignment: Alignment.centerRight,
+              //   children: [
+              //     SearchHome(text: "Paste Your Streaming Link", controller: urlController),
+              //     isFetchingMetadata.value
+              //         ? Padding(
+              //       padding: const EdgeInsets.only(right: 12.0),
+              //       child: CircularProgressIndicator(strokeWidth: 2),
+              //     )
+              //         : ElevatedButton(
+              //       onPressed: () {
+              //         fetchMetadata(urlController.text);
+              //       },
+              //       child: Text("Fetch"),
+              //     ),
+              //   ],
+              // )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child:SearchHome(text: "Paste Your Streaming Link", controller: urlController),
+                  ),
+                  SizedBox(width: 5),
+
+                  Opacity(
+                      opacity: 0.8,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            side: BorderSide(
+                              color: Theme.of(context).colorScheme.primaryContainer,
+                              width: 2,
+                            ),
+                            shadowColor: Theme.of(context).colorScheme.primary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                          ),
+                          onPressed: () {
+                            fetchMetadata(urlController.text);
+                          },
+                          child: Text("verify", style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.primaryContainer)),
+                        ),
+                    ),
+                ],
               ),
-              onChanged: (value) {
-                setState(() {
-                  selectedPlatform = value!;
-                });
-              },
-              items: ["YouTube", "Twitch", "Facebook", "Other"]
-                  .map((platform) => DropdownMenuItem(
-                value: platform,
-                child: Text(platform),
-              ))
-                  .toList(),
-            ),
-            SizedBox(height: 20),
-            Text("Stream Title", style: Theme.of(context).textTheme.labelLarge),
-            SizedBox(height: 8),
-            SearchHome(text: "Video / Stream Title", controller: titleController),
-            SizedBox(height: 20),
-            Text("Choose Thumbnail", style: Theme.of(context).textTheme.labelLarge),
-            SizedBox(height: 8),
-            Center(
-              child: Obx(
-                    () => Container(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  height: (MediaQuery.of(context).size.width * 0.8) * (9 / 16),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.background,
+              SizedBox(height: 20),
+              Text("Platform", style: Theme.of(context).textTheme.labelLarge),
+              SizedBox(height: 8),
+              DropdownButtonFormField<String>(
+                value: selectedPlatform,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: Theme.of(context).colorScheme.secondary,
-                      width: 1,
+                    borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.secondary),
+                  ),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    selectedPlatform = value!;
+                  });
+                },
+                items: ["YouTube", "Twitch", "Facebook", "Other"]
+                    .map((platform) => DropdownMenuItem(
+                  value: platform,
+                  child: Text(platform),
+                ))
+                    .toList(),
+              ),
+              SizedBox(height: 20),
+              Text("Stream Title", style: Theme.of(context).textTheme.labelLarge),
+              SizedBox(height: 8),
+              SearchHome(text: "Video / Stream Title", controller: titleController),
+              SizedBox(height: 20),
+              Text("Thumbnail", style: Theme.of(context).textTheme.labelLarge),
+              SizedBox(height: 8),
+              Center(
+                child: Obx(
+                      () => Container(
+                    width: MediaQuery.of(context).size.width * 1,
+                    height: (MediaQuery.of(context).size.width * 1) * (9 / 16),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.background,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.secondary,
+                        width: 1,
+                      ),
+                    ),
+                    child: imagePath.value.isEmpty
+                        ? Icon(Icons.image, size: 50, color: Colors.grey)
+                        : ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        imagePath.value,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                  child: imagePath.value.isEmpty
-                      ? Icon(Icons.add, size: 50, color: Colors.grey)
-                      : ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      imagePath.value,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Expanded(
-                  child: Primarybutton(
-                    btnName: "Cancel",
-                    icon: Icons.cancel,
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
+              SizedBox(height: 100),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    child: Primarybutton(
+                      btnName: "Cancel",
+                      icon: Icons.cancel,
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
                   ),
-                ),
-                SizedBox(width: 5),
-                Expanded(
-                  child: Primarybutton(
-                    btnName: "Publish",
-                    icon: Icons.upload,
-                    onTap: publishStream,
+                  SizedBox(width: 5),
+                  Expanded(
+                    child: Primarybutton(
+                      btnName: "Publish",
+                      icon: Icons.upload,
+                      onTap: publishStream,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
