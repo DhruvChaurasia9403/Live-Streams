@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:streamstreak/Pages/CreateStream/CreateStreamPage.dart';
+import 'package:streamstreak/Pages/EditStream/EditStreamPage.dart';
 import 'package:streamstreak/Pages/HomePage/HomePage.dart';
 
 var pagePath=[
@@ -14,4 +15,9 @@ var pagePath=[
     page:()=> CreateStreamPage(),
     transition: Transition.zoom,
   ),
+  GetPage(
+    name: "/editStreamPage",
+    page:()=> EditStreamPage(),
+    transition: Transition.zoom,
+  )
 ];

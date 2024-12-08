@@ -40,29 +40,30 @@ class _FirstTimeOverlayState extends State<FirstTimeOverlay> {
         child: Stack(
           children: [
             Container(
-              color: Colors.black54,
+              color: Colors.black.withOpacity(0.5),
             ),
             Positioned(
-              bottom: 20,
-              right: 20,
-              child: Column(
+              top: 16.5,
+              right: 15.9,
+              child: Row(
                 children: [
                   Container(
                     padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.primaryContainer,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
-                      "Tap here to create a stream",
-                      style: TextStyle(color: Colors.black, fontSize: 16),
+                      "Tap here to create stream",
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Theme.of(context).colorScheme.background),
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Icon(Icons.arrow_downward, size: 50, color: Colors.white),
+                  Icon(Icons.arrow_forward, size: 50, color: Theme.of(context).colorScheme.primaryContainer),
+                  Icon(Icons.add, size: 50, color: Theme.of(context).colorScheme.primary),
                 ],
               ),
             ),
+            // Center(child: Text("Swipe to dismiss", style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Theme.of(context).colorScheme.primary))),
           ],
         ),
       ),

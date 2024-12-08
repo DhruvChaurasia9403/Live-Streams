@@ -16,7 +16,7 @@ class Homepage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Live Streams',
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Theme.of(context).colorScheme.primaryContainer),
         ),
       ),
       body: Stack(
@@ -80,51 +80,56 @@ class Homepage extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: 20),
                           child: Icon(Icons.delete, color: Theme.of(context).colorScheme.primaryContainer),
                         ),
-                        child: Card(
-                          elevation: 5,
-                          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 120,
-                                height: 70,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(stream['thumbnail']),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  borderRadius: BorderRadius.horizontal(left: Radius.circular(10)),
-                                ),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        stream['title'],
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium
-                                            ?.copyWith(fontWeight: FontWeight.bold),
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      SizedBox(height: 5),
-                                      Text(
-                                        stream['platform'],
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall
-                                            ?.copyWith(color: Colors.grey),
-                                      ),
-                                    ],
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.toNamed("/editStreamPage", arguments: stream);
+                          },
+                          child: Card(
+                            elevation: 5,
+                            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: 120,
+                                  height: 70,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(stream['thumbnail']),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    borderRadius: BorderRadius.horizontal(left: Radius.circular(10)),
                                   ),
                                 ),
-                              ),
-                            ],
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          stream['title'],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium
+                                              ?.copyWith(fontWeight: FontWeight.bold),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        SizedBox(height: 5),
+                                        Text(
+                                          stream['platform'],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall
+                                              ?.copyWith(color: Theme.of(context).colorScheme.secondary),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );

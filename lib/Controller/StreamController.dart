@@ -41,4 +41,12 @@ class StreamsController extends GetxController {
       print("Error deleting stream: $e");
     }
   }
+  Future<void> updateStream(String streamId, Map<String, dynamic> updatedStreamData) async {
+    try {
+      await FirebaseFirestore.instance.collection('streams').doc(streamId).update(updatedStreamData);
+      await fetchStreams();
+    } catch (e) {
+      print("Error updating stream: $e");
+    }
+  }
 }
