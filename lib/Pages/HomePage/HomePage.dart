@@ -10,7 +10,26 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final StreamsController streamsController = Get.put(StreamsController());
-    streamsController.fetchStreams();
+    final TextEditingController searchController = TextEditingController();
+    final RxList<Map<String, dynamic>> filteredStreams = <Map<String, dynamic>>[].obs;
+
+    streamsController.fetchStreams().then((_) {
+      filteredStreams.value = streamsController.streams;
+    });
+
+    void filterStreams(String query) {
+      if (query.isEmpty) {
+        filteredStreams.value = streamsController.streams;
+      } else {
+        filteredStreams.value = streamsController.streams
+            .where((stream) => stream['title'].toLowerCase().contains(query.toLowerCase()))
+            .toList();
+      }
+    }
+
+    searchController.addListener(() {
+      filterStreams(searchController.text);
+    });
 
     return Scaffold(
       appBar: AppBar(
@@ -27,9 +46,10 @@ class Homepage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: SearchHome(
                         text: "Search ...",
+                        controller: searchController,
                         icon: Icon(Icons.search),
                       ),
                     ),
@@ -60,13 +80,13 @@ class Homepage extends StatelessWidget {
               ),
               Expanded(
                 child: Obx(() {
-                  if (streamsController.streams.isEmpty) {
+                  if (filteredStreams.isEmpty) {
                     return const Center(child: Text("No streams available."));
                   }
                   return ListView.builder(
-                    itemCount: streamsController.streams.length,
+                    itemCount: filteredStreams.length,
                     itemBuilder: (context, index) {
-                      final stream = streamsController.streams[index];
+                      final stream = filteredStreams[index];
                       return Dismissible(
                         key: Key(stream['id']),
                         direction: DismissDirection.endToStart,

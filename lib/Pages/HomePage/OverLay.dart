@@ -58,7 +58,7 @@ class _FirstTimeOverlayState extends State<FirstTimeOverlay> {
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Theme.of(context).colorScheme.background),
                     ),
                   ),
-                  Icon(Icons.arrow_forward, size: 50, color: Theme.of(context).colorScheme.primaryContainer),
+                  Icon(Icons.arrow_forward, size: 40, color: Theme.of(context).colorScheme.primaryContainer),
                   Icon(Icons.add, size: 50, color: Theme.of(context).colorScheme.primary),
                 ],
               ),
