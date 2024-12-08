@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:streamstreak/Config/Keys.dart';
 
 class MetadataController extends GetxController {
-  final String apiKey = "8a164b145b9b74f170aece553501c212";
 
   Future<Map<String, String>?> fetchMetadata(String url) async {
     try {

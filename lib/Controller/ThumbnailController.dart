@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:streamstreak/Config/Keys.dart';
 import 'package:streamstreak/Model/UserModel.dart';
 import 'package:http/http.dart' as http;
 
@@ -30,8 +31,6 @@ class ThumbnailController extends GetxController {
 
   Future<String?> uploadImageToCloudinary(String imageUrl) async {
     try {
-      const cloudName = "dgsxsujn9";
-      const uploadPreset = "profile_upload_unsigned";
       final url = Uri.parse("https://api.cloudinary.com/v1_1/$cloudName/image/upload");
 
       final response = await http.post(

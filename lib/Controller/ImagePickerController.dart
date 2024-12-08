@@ -4,9 +4,8 @@ import 'package:http/http.dart'as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:streamstreak/Config/Keys.dart';
 class ImagePickerController extends GetxController {
-  final String cloudinaryUrl = "https://api.cloudinary.com/v1_1/dgsxsujn9/image/upload";
-  final String uploadPreset = "profile_upload_unsigned";
 
   Future<String> pickImage() async {
     // Use the image_picker package to choose an image
