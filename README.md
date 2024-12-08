@@ -14,16 +14,16 @@ StreamStreak is a Flutter application for managing live streams. It allows users
 - Firebase integration for data storage
 
 ## Screenshots
-![Live Stream 1.png](ScreenShots%2FLive%20Stream%201.png)
-![Live Straeam 2 (OverLay).png](ScreenShots%2FLive%20Straeam%202%20%28OverLay%29.png)
-![Lve Streeam 4 (Home Page).png](ScreenShots%2FLve%20Streeam%204%20%28Home%20Page%29.png)
-![Live Stream 3 (CreateStream).png](ScreenShots%2FLive%20Stream%203%20%28CreateStream%29.png)
-![Live Stream (Edit Stream).png](ScreenShots%2FLive%20Stream%20%28Edit%20Stream%29.png)
-![Live Stream (Swipe to delete).png](ScreenShots%2FLive%20Stream%20%28Swipe%20to%20delete%29.png)
-![Live Stream (Search).png](ScreenShots%2FLive%20Stream%20%28Search%29.png)
 
-<!-- ![Screenshot 1](path/to/screenshot1.png) -->
-<!-- ![Screenshot 2](path/to/screenshot2.png) -->
+<p align="center">
+  <img src="ScreenShots/Live Stream 1.png" alt="Live Stream Page" width="300" />
+  <img src="ScreenShots/Live Straeam 2 (OverLay).png" alt="Stream Overlay" width="300" />
+  <img src="ScreenShots/Lve Streeam 4 (Home Page).png" alt="Home Page" width="300" />
+  <img src="ScreenShots/Live Stream 3 (CreateStream).png" alt="Create Stream Page" width="300" />
+  <img src="ScreenShots/Live Stream (Edit Stream).png" alt="Edit Stream Page" width="300" />
+  <img src="ScreenShots/Live Stream (Swipe to delete).png" alt="Swipe to Delete" width="300" />
+  <img src="ScreenShots/Live Stream (Search).png" alt="Search Stream" width="300" />
+</p>
 
 ## Getting Started
 
@@ -48,11 +48,11 @@ StreamStreak is a Flutter application for managing live streams. It allows users
     ```
 
 3. Set up Firebase:
-    - Follow the instructions to add Firebase to your Flutter project: [Firebase Setup](https://firebase.flutter.dev/docs/overview)
-    - Add your `google-services.json` (for Android) and `GoogleService-Info.plist` (for iOS) to the respective directories.
+   - Follow the instructions to add Firebase to your Flutter project: [Firebase Setup](https://firebase.flutter.dev/docs/overview)
+   - Add your `google-services.json` (for Android) and `GoogleService-Info.plist` (for iOS) to the respective directories.
 
 4. Set up Cloudinary:
-    - Create a `lib/Config/Keys.dart` file with your Cloudinary credentials:
+   - Create a `lib/Config/Keys.dart` file with your Cloudinary credentials:
     ```dart
     final String cloudinaryUrl = "https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload";
     final String uploadPreset = "YOUR_UPLOAD_PRESET";
